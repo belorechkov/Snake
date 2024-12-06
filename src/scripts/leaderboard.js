@@ -7,6 +7,7 @@ export const showLeaderboard = () => {
 
   if (scores.length === 0) {
     leaderboardList.innerHTML = "<li>No scores yet!</li>";
+    return;
   }
 
   scores.forEach((score) => {
@@ -14,13 +15,8 @@ export const showLeaderboard = () => {
     listItem.textContent = `Date: ${score.date}, Score: ${score.score}`;
     leaderboardList.appendChild(listItem);
   });
-
-  document.getElementById("start-page").classList.add("hidden");
-  document.getElementById("leaderboard-page").classList.remove("hidden");
 };
 
-document.getElementById("leaderboard-button").addEventListener("click", showLeaderboard);
-document.getElementById("back-button").addEventListener("click", () => {
-  document.getElementById("leaderboard-page").classList.add("hidden");
-  document.getElementById("start-page").classList.remove("hidden");
+document.addEventListener("DOMContentLoaded", () => {
+  showLeaderboard();
 });

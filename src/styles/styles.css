@@ -73,7 +73,9 @@ li {
   border-radius: 4px;
 }
 
-
+.score-display {
+  width: 100px;
+}
 
 .controls {
     display: flex;
@@ -90,3 +92,7 @@ li {
     margin: 10px;
   }
   
+
+  
+   
+

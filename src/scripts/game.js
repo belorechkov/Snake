@@ -14,7 +14,7 @@ const HEIGHT = WIDTH;
 const TILE_NUMBER = 20;
 const TILE_SIZE = WIDTH / TILE_NUMBER;
 const INITIAL_SPEED = 1;
-const SPEED_INCREMENT = 1; // Increase speed when an apple is eaten
+const SPEED_INCREMENT = 10; // Increase speed when an apple is eaten
 
 let app, snakeContainer, food, score, gameOver, snakeConfig, snakeHead, speed, lastUpdateTime;
 let scoreText;
@@ -111,7 +111,13 @@ const handleFoodCollision = () => {
   if (snakeHead.x === food.x && snakeHead.y === food.y) {
     snakeConfig.length += 1;
     score += 1;
-    speed += SPEED_INCREMENT;
+
+    if (score % 5 === 0) {
+      speed += 1;
+    }
+    // speed += SPEED_INCREMENT;
+    console.log(`SPEED_INCREMENT: ${SPEED_INCREMENT}, speed: ${speed}`);
+
     replaceFood();
     updateScoreDisplay();
 
@@ -126,13 +132,20 @@ const handleSelfCollision = () => {
     gameOver = true;
     app.ticker.stop();
     saveScore(score);
-    document.getElementById("game-container").innerHTML = `<div class="game-over">Game Over :(</div>`;
+
+    const gameOverMessage = document.createElement("div");
+    gameOverMessage.className = "game-over";
+    gameOverMessage.textContent = "Game Over :(";
+    const gameContainer = document.getElementById("game-container");
+    gameContainer.innerHTML = "";
+    gameContainer.appendChild(gameOverMessage);
+
     setTimeout(() => {
-      document.getElementById("game-container").classList.add("hidden");
-      document.getElementById("leaderboard-page").classList.remove("hidden");
+      gameContainer.classList.add("hidden");
+      document.getElementById("start-page").classList.remove("hidden");
       showLeaderboard();
-      document.getElementById("game-container").innerHTML = "";
-    }, 1000);
+      gameContainer.innerHTML = "";
+    }, 2000);
   }
 };
 
@@ -145,13 +158,20 @@ const handleObstacleCollision = () => {
       gameOver = true;
       app.ticker.stop();
       saveScore(score);
-      document.getElementById("game-container").innerHTML = `<div class="game-over">Game Over :(</div>`;
+
+      const gameOverMessage = document.createElement("div");
+      gameOverMessage.className = "game-over";
+      gameOverMessage.textContent = "Game Over :(";
+      const gameContainer = document.getElementById("game-container");
+      gameContainer.innerHTML = "";
+      gameContainer.appendChild(gameOverMessage);
+
       setTimeout(() => {
-        document.getElementById("game-container").classList.add("hidden");
-        document.getElementById("leaderboard-page").classList.remove("hidden");
+        gameContainer.classList.add("hidden");
+        document.getElementById("start-page").classList.remove("hidden");
         showLeaderboard();
-        document.getElementById("game-container").innerHTML = "";
-      }, 1000);
+        gameContainer.innerHTML = "";
+      }, 2000);
     }
   }
 };
@@ -188,7 +208,7 @@ const gameLoop = (deltaTime) => {
 };
 
 const levelUp = () => {
-  if (level === 1 && score >= 5) {
+  if (level === 1 && score >= 25) {
     level = 2;
 
     // Display a message indicating the level transition
@@ -304,15 +324,3 @@ const handleKeyPress = (e) => {
 };
 
 document.getElementById("start-button").addEventListener("click", initializeGame);
-
-// const pauseButton = document.createElement("button");
-// pauseButton.textContent = "Pause";
-// pauseButton.classList.add("button");
-// pauseButton.addEventListener("click", () => app.ticker.stop());
-// document.getElementById("game-container").appendChild(pauseButton);
-
-// const resumeButton = document.createElement("button");
-// resumeButton.textContent = "Resume";
-// resumeButton.classList.add("button");
-// resumeButton.addEventListener("click", () => app.ticker.start());
-// document.getElementById("game-container").appendChild(resumeButton);
