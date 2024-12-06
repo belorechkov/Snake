@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="/src/styles/styles.css" />
+    <link rel="icon" type="image/x-icon" href="/src/assets/images/apple.png" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="start-page" class="start-page">
+        <h1>Snake Game</h1>
+        <button id="start-button" class="button">Start Game</button>
+        <button id="leaderboard-button" class="button">Leaderboard</button>
+      </div>
+      <div id="game-container" class="game-container hidden"></div>
+      <div id="leaderboard-page" class="leaderboard-page hidden">
+        <h1>Leaderboard:</h1>
+        <ul id="leaderboard-list"></ul>
+        <button id="back-button" class="button">Back to Start</button>
+      </div>
+    </div>
+    <script type="module" src="/src/scripts/startPage.js"></script>
+    <script type="module" src="/src/scripts/game.js"></script>
+    <script type="module" src="/src/scripts/leaderboard.js"></script>
+  </body>
+</html>
