@@ -1,18 +1,17 @@
 import * as PIXI from "pixi.js";
 import { gsap } from "gsap";
 import { PixiPlugin } from "gsap/PixiPlugin";
-import { saveScore } from "./utils";
-import { showLeaderboard } from "./leaderboard";
+import { saveScore } from "./utils.js";
+import { showLeaderboard } from "./leaderboard.js";
 
 gsap.registerPlugin(PixiPlugin);
 PixiPlugin.registerPIXI(PIXI);
-
-const appleTexture = await PIXI.Assets.load("/src/assets/images/apple.png");
 
 const WIDTH = 500;
 const HEIGHT = WIDTH;
 const TILE_NUMBER = 20;
 const TILE_SIZE = WIDTH / TILE_NUMBER;
+const appleTexture = await PIXI.Assets.load("/src/assets/images/apple.png");
 const INITIAL_SPEED = 1;
 const SPEED_INCREMENT = 10; // Increase speed when an apple is eaten
 

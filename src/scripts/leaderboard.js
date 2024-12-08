@@ -1,4 +1,4 @@
-import { getScores } from "./utils";
+import { getScores } from "./utils.js";
 
 export const showLeaderboard = () => {
   const scores = getScores();
